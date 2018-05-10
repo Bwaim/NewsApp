@@ -16,6 +16,8 @@
 
 package com.bwaim.newsapp.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -70,13 +72,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.news_item, parent, false);
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         return new ViewHolder(cardView);
     }
 
@@ -109,6 +104,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.mAuthor.setText(news.getAuthor());
         holder.mTrailText.setText(news.getTrailText());
         holder.mImage.setImageDrawable(news.getImg());
+
+        final String url = news.getUrl();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(url);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     /**
