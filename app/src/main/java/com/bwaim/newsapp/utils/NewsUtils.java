@@ -63,6 +63,7 @@ public class NewsUtils {
                         news.setAuthor(reference.getString("id"));
                     }
                 }
+                newsList.add(news);
             }
 
         } catch (JSONException e) {
