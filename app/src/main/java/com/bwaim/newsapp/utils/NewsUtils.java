@@ -17,6 +17,7 @@
 package com.bwaim.newsapp.utils;
 
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.util.Log;
 
 import com.bwaim.newsapp.model.News;
@@ -76,7 +77,15 @@ public class NewsUtils {
                 }
 
                 JSONObject fields = jsonNews.getJSONObject("fields");
-                news.setTrailText(fields.getString("trailText"));
+
+                String trailText;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    trailText = Html.fromHtml(fields.getString("trailText")
+                            , Html.FROM_HTML_MODE_LEGACY).toString();
+                } else {
+                    trailText = Html.fromHtml(fields.getString("trailText")).toString();
+                }
+                news.setTrailText(trailText);
 
                 Drawable img = getImage(fields.getString("thumbnail"));
                 news.setImg(img);
