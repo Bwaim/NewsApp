@@ -23,9 +23,13 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CursorAdapter;
+import android.widget.TextView;
 
 import com.bwaim.newsapp.R;
+import com.bwaim.newsapp.loaders.NewsLoader;
 import com.bwaim.newsapp.model.News;
 
 import java.util.List;
@@ -35,12 +39,26 @@ public class MainActivity extends AppCompatActivity
 
     private static final int MAIN_ACTIVITY_LOADER = 1;
 
+    /**
+     * Views of the layout
+     */
+    private RecyclerView mRecyclerView;
+    private TextView mEmptyListTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get all necessary views
+        mRecyclerView = findViewById(R.id.recycler_view_RV);
+        mEmptyListTV = findViewById(R.id.empty_list_TV);
+
         getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, null, this);
+    }
+
+    private void setEmptyList() {
+        mEmptyListTV.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -52,7 +70,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return null;
+        return new NewsLoader(this);
     }
 
     /**
@@ -95,7 +113,10 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
-
+        if (data == null || data.isEmpty()) {
+            setEmptyList();
+            return;
+        }
     }
 
     /**

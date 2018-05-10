@@ -16,4 +16,5 @@
 
 <resources>
     <string name="app_name">News App</string>
+    <string name="no_news">No news found.</string>
 </resources>
