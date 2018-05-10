@@ -16,6 +16,8 @@
 
 package com.bwaim.newsapp.model;
 
+import java.util.Date;
+
 /**
  * Created by Fabien Boismoreau on 10/05/2018.
  * <p>
@@ -27,7 +29,7 @@ public class News {
 
     private String author;
 
-    private String publishingDate;
+    private Date publishingDate;
 
     public News(String title, String sectionName) {
         this.title = title;
@@ -58,11 +60,11 @@ public class News {
         this.author = author;
     }
 
-    public String getPublishingDate() {
+    public Date getPublishingDate() {
         return publishingDate;
     }
 
-    public void setPublishingDate(String publishingDate) {
+    public void setPublishingDate(Date publishingDate) {
         this.publishingDate = publishingDate;
     }
 }

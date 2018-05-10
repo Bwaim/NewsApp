@@ -20,6 +20,7 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 
 import com.bwaim.newsapp.model.News;
+import com.bwaim.newsapp.utils.NewsUtils;
 import com.bwaim.newsapp.utils.QueryUtils;
 
 import java.util.List;
@@ -84,6 +85,6 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
         String jsonResponse = QueryUtils.makeHttpRequest(url);
 
-        return null;
+        return NewsUtils.createNewsFromJson(jsonResponse);
     }
 }

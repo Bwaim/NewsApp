@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     private static final String QUERY = "QUERY";
 
     private static final String DEFAULT_URL =
-            "http://content.guardianapis.com/search?q=debates&api-key=test";
+            "http://content.guardianapis.com/search?q=debates&show-references=author&api-key=test";
 
     /**
      * Views of the layout
