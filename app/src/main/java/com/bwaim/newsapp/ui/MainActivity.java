@@ -21,11 +21,14 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CursorAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bwaim.newsapp.R;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity
      */
     private RecyclerView mRecyclerView;
     private TextView mEmptyListTV;
+    private ProgressBar mProgressBarPB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +57,33 @@ public class MainActivity extends AppCompatActivity
         // Get all necessary views
         mRecyclerView = findViewById(R.id.recycler_view_RV);
         mEmptyListTV = findViewById(R.id.empty_list_TV);
+        mProgressBarPB = findViewById(R.id.progress_bar_PB);
 
-        getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, null, this);
+        if (isConnected()) {
+            getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, null, this);
+        } else {
+            setNoNetworkView();
+        }
     }
 
     private void setEmptyList() {
+        mEmptyListTV.setText(R.string.no_news);
         mEmptyListTV.setVisibility(View.VISIBLE);
+    }
+
+    private void setNoNetworkView() {
+        mProgressBarPB.setVisibility(View.GONE);
+        mEmptyListTV.setText(R.string.no_internet);
+        mEmptyListTV.setVisibility(View.VISIBLE);
+    }
+
+    private boolean isConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        if (cm == null) {
+            return false;
+        }
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        return ni != null && ni.isConnectedOrConnecting();
     }
 
     /**
@@ -113,6 +138,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+        mProgressBarPB.setVisibility(View.GONE);
         if (data == null || data.isEmpty()) {
             setEmptyList();
             return;

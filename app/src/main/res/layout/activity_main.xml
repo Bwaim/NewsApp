@@ -36,4 +36,11 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_PB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
 </RelativeLayout>
