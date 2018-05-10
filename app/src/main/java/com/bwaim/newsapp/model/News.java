@@ -16,7 +16,7 @@
 
 package com.bwaim.newsapp.model;
 
-import java.util.Date;
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by Fabien Boismoreau on 10/05/2018.
@@ -29,7 +29,13 @@ public class News {
 
     private String author;
 
-    private Date publishingDate;
+    private String publishingDate;
+
+    private String url;
+
+    private Drawable img;
+
+    private String trailText;
 
     public News(String title, String sectionName) {
         this.title = title;
@@ -60,11 +66,35 @@ public class News {
         this.author = author;
     }
 
-    public Date getPublishingDate() {
+    public String getPublishingDate() {
         return publishingDate;
     }
 
-    public void setPublishingDate(Date publishingDate) {
+    public void setPublishingDate(String publishingDate) {
         this.publishingDate = publishingDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Drawable getImg() {
+        return img;
+    }
+
+    public void setImg(Drawable img) {
+        this.img = img;
+    }
+
+    public String getTrailText() {
+        return trailText;
+    }
+
+    public void setTrailText(String trailText) {
+        this.trailText = trailText;
     }
 }

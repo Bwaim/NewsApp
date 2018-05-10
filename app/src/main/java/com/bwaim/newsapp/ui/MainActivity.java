@@ -25,6 +25,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CursorAdapter;
@@ -32,9 +33,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bwaim.newsapp.R;
+import com.bwaim.newsapp.adapters.NewsAdapter;
 import com.bwaim.newsapp.loaders.NewsLoader;
 import com.bwaim.newsapp.model.News;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     private static final String QUERY = "QUERY";
 
     private static final String DEFAULT_URL =
-            "http://content.guardianapis.com/search?q=debates&show-references=author&api-key=test";
+            "http://content.guardianapis.com/search?q=debates&show-fields=trailText,thumbnail&show-tags=contributor&api-key=test";
 
     /**
      * Views of the layout
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private TextView mEmptyListTV;
     private ProgressBar mProgressBarPB;
+
+    private NewsAdapter mNewsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,12 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView = findViewById(R.id.recycler_view_RV);
         mEmptyListTV = findViewById(R.id.empty_list_TV);
         mProgressBarPB = findViewById(R.id.progress_bar_PB);
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mNewsAdapter = new NewsAdapter(new ArrayList<News>());
+        mRecyclerView.setAdapter(mNewsAdapter);
 
         refreshNews(DEFAULT_URL);
     }
@@ -157,8 +168,12 @@ public class MainActivity extends AppCompatActivity
         mProgressBarPB.setVisibility(View.GONE);
         if (data == null || data.isEmpty()) {
             setEmptyList();
+            mNewsAdapter.setData(new ArrayList<News>());
             return;
         }
+
+        mNewsAdapter.setData(data);
+        mNewsAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -170,6 +185,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
-
+        mNewsAdapter.setData(new ArrayList<News>());
+        setEmptyList();
     }
 }

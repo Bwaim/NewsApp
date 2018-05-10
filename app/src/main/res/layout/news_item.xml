@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2018 Fabien Boismoreau
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/news_margin"
+    android:layout_marginStart="@dimen/news_margin"
+    android:layout_marginTop="@dimen/news_margin"
+    android:minHeight="@dimen/min_height_card"
+    app:cardCornerRadius="@dimen/cardview_default_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_header_height"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/section_TV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_title_height"
+                android:layout_marginEnd="@dimen/card_element_margin_start"
+                android:layout_marginStart="@dimen/card_element_margin_start"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/section_text_size"
+                android:textStyle="bold"
+                tools:text="Section" />
+
+            <TextView
+                android:id="@+id/title_TV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_secondary_height"
+                android:layout_marginEnd="@dimen/card_element_margin_start"
+                android:layout_marginStart="@dimen/card_element_margin_start"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                tools:text="Title" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_IV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_img_height"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/news_image"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/trail_text_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/card_element_margin_start"
+            android:layout_marginStart="@dimen/card_element_margin_start"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingTop="@dimen/card_element_margin_start"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="@dimen/title_text_size"
+            tools:text="trail Text." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_bottom_margin"
+            android:layout_marginEnd="@dimen/card_element_margin_start"
+            android:layout_marginStart="@dimen/card_element_margin_start"
+            android:layout_marginTop="@dimen/card_bottom_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/publication_date_TV"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="@dimen/date_text_size"
+                tools:text="01/01/2018" />
+
+            <TextView
+                android:id="@+id/author_TV"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="@dimen/date_text_size"
+                tools:text="Author" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

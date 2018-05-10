@@ -43,7 +43,7 @@ public class QueryUtils {
     private QueryUtils() {
     }
 
-    private static URL createURL(String query) {
+    public static URL createURL(String query) {
         URL url = null;
         try {
             url = new URL(query);
@@ -65,7 +65,7 @@ public class QueryUtils {
         StringBuilder input = new StringBuilder();
         String line = reader.readLine();
 
-        while (!line.isEmpty()) {
+        while (line != null && !line.isEmpty()) {
             input.append(line);
             line = reader.readLine();
         }
@@ -108,7 +108,7 @@ public class QueryUtils {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    Log.e(LOG_TAG, "Error closing the iputStream", e);
+                    Log.e(LOG_TAG, "Error closing the inputStream", e);
                 }
             }
         }
