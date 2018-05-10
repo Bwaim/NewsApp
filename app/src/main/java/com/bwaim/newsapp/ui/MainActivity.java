@@ -21,8 +21,8 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CursorAdapter;
 
 import com.bwaim.newsapp.R;
@@ -33,10 +33,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
 
+    private static final int MAIN_ACTIVITY_LOADER = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, null, this);
     }
 
     /**
