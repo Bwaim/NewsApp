@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity
 
     private static final int MAIN_ACTIVITY_LOADER = 1;
 
+    private static final String QUERY = "QUERY";
+
+    private static final String DEFAULT_URL =
+            "http://content.guardianapis.com/search?q=debates&api-key=test";
+
     /**
      * Views of the layout
      */
@@ -59,11 +64,7 @@ public class MainActivity extends AppCompatActivity
         mEmptyListTV = findViewById(R.id.empty_list_TV);
         mProgressBarPB = findViewById(R.id.progress_bar_PB);
 
-        if (isConnected()) {
-            getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, null, this);
-        } else {
-            setNoNetworkView();
-        }
+        refreshNews(DEFAULT_URL);
     }
 
     private void setEmptyList() {
@@ -75,6 +76,17 @@ public class MainActivity extends AppCompatActivity
         mProgressBarPB.setVisibility(View.GONE);
         mEmptyListTV.setText(R.string.no_internet);
         mEmptyListTV.setVisibility(View.VISIBLE);
+    }
+
+    private void refreshNews(String url) {
+        if (isConnected()) {
+            Bundle args = new Bundle();
+            args.putString(QUERY, url);
+
+            getLoaderManager().initLoader(MAIN_ACTIVITY_LOADER, args, this);
+        } else {
+            setNoNetworkView();
+        }
     }
 
     private boolean isConnected() {
@@ -95,7 +107,11 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(this);
+        String query = "";
+        if (args != null) {
+            query = args.getString(QUERY);
+        }
+        return new NewsLoader(this, query);
     }
 
     /**
