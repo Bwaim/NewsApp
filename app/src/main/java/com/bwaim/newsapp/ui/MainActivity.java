@@ -32,6 +32,7 @@ import android.widget.CursorAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bwaim.newsapp.BuildConfig;
 import com.bwaim.newsapp.R;
 import com.bwaim.newsapp.adapters.NewsAdapter;
 import com.bwaim.newsapp.loaders.NewsLoader;
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity
     private static final String QUERY = "QUERY";
 
     private static final String DEFAULT_URL =
-            "http://content.guardianapis.com/search?q=sport&show-fields=trailText,thumbnail&show-tags=contributor&api-key=test";
+            "http://content.guardianapis.com/search?q=sport&show-fields=trailText,thumbnail&show-tags=contributor&api-key="
+                    + BuildConfig.MY_GUARDIAN_API_KEY;
 
     /**
      * Views of the layout

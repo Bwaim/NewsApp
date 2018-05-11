@@ -39,6 +39,8 @@ public class QueryUtils {
 
     private static final int CONNECTION_TIMEOUT = 15000;
 
+    private static final int SUCCESS_CODE = 200;
+
     // Make the class static
     private QueryUtils() {
     }
@@ -92,7 +94,7 @@ public class QueryUtils {
             connection.setConnectTimeout(CONNECTION_TIMEOUT);
             connection.connect();
 
-            if (connection.getResponseCode() == 200) {
+            if (connection.getResponseCode() == SUCCESS_CODE) {
                 inputStream = connection.getInputStream();
                 jsonResponse = readInputStream(inputStream);
             } else {
