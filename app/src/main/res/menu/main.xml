@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2018 Fabien Boismoreau
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +14,9 @@
   ~    limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">News App</string>
-    <string name="no_news">No news found.</string>
-    <string name="no_internet">Not internet connection.</string>
-    <string name="news_image">Image of the article</string>
-    <string name="settings_title">News Settings</string>
-    <string name="settings_title_item">Settings</string>
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/settings_action"
+        android:title="@string/settings_title_item" />
+
+</menu>

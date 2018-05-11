@@ -14,10 +14,12 @@
   ~    limitations under the License.
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings_fragment"
+    android:name="com.bwaim.newsapp.ui.SettingsActivity$NewsPreferenceFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+</fragment>
