@@ -16,9 +16,11 @@
 
 package com.bwaim.newsapp.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -37,6 +39,19 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.settings_main);
+
+            Preference limit = findPreference(getString(R.string.settings_limit_key));
+            bindPreferenceSummaryToValue(limit);
+        }
+
+        private void bindPreferenceSummaryToValue(Preference preference) {
+            preference.setOnPreferenceChangeListener(this);
+
+            SharedPreferences preferences =
+                    PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            String preferenceString = preferences.getString(preference.getKey(), "");
+            onPreferenceChange(preference, preferenceString);
         }
 
         /**
@@ -50,6 +65,10 @@ public class SettingsActivity extends AppCompatActivity {
          */
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
+            String valueString = (String) newValue;
+
+            preference.setSummary(valueString);
+
             return false;
         }
     }

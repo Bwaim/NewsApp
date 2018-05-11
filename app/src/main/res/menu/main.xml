@@ -14,7 +14,9 @@
   ~    limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
     <item
         android:id="@+id/settings_action"
         android:title="@string/settings_title_item" />

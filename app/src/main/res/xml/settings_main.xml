@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2018 Fabien Boismoreau
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,14 @@
   ~    limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">News App</string>
-    <string name="no_news">No news found.</string>
-    <string name="no_internet">Not internet connection.</string>
-    <string name="news_image">Image of the article</string>
-    <string name="settings_title">News Settings</string>
-    <string name="settings_title_item">Settings</string>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
 
-    <string name="settings_limit_key">settings_limit</string>
-    <string name="settings_limit_label">Number of News</string>
-    <string name="settings_limit_default">10</string>
-</resources>
+    <EditTextPreference
+        android:defaultValue="@string/settings_limit_default"
+        android:inputType="numberDecimal"
+        android:key="@string/settings_limit_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_limit_label" />
+
+</PreferenceScreen>
