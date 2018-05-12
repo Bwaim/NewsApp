@@ -22,7 +22,77 @@
     <string name="settings_title">News Settings</string>
     <string name="settings_title_item">Settings</string>
 
-    <string name="settings_limit_key">settings_limit</string>
+    <string name="settings_limit_key" translatable="false">settings_limit</string>
     <string name="settings_limit_label">Number of News</string>
-    <string name="settings_limit_default">10</string>
+    <string name="settings_limit_default" translatable="false">10</string>
+
+    <string name="settings_section_key" translatable="false">settings_section</string>
+    <string name="settings_section_label">Categories</string>
+    <string name="settings_section_default" translatable="false">@string/section_all_value</string>
+
+    <string name="section_all_label">All</string>
+    <string name="section_all_value" translatable="false">all</string>
+
+    <string name="section_animals_farmed_value" translatable="false">animals-farmed</string>
+    <string name="section_animals_farmed_label">Animals farmed</string>
+
+    <string name="section_artanddesign_value" translatable="false">artanddesign</string>
+    <string name="section_artanddesign_label">Art and design</string>
+
+    <string name="section_books_value" translatable="false">books</string>
+    <string name="section_books_label">Books</string>
+
+    <string name="section_business_value" translatable="false">business</string>
+    <string name="section_business_label">Business</string>
+
+    <string name="section_culture_value" translatable="false">culture</string>
+    <string name="section_culture_label">Culture</string>
+
+    <string name="section_education_value" translatable="false">education</string>
+    <string name="section_education_label">Education</string>
+
+    <string name="section_environment_value" translatable="false">environment</string>
+    <string name="section_environment_label">Environment</string>
+
+    <string name="section_fashion_value" translatable="false">fashion</string>
+    <string name="section_fashion_label">Fashion</string>
+
+    <string name="section_film_value" translatable="false">film</string>
+    <string name="section_film_label">Film</string>
+
+    <string name="section_games_value" translatable="false">games</string>
+    <string name="section_games_label">Games</string>
+
+    <string name="section_lifeandstyle_value" translatable="false">lifeandstyle</string>
+    <string name="section_lifeandstyle_label">Life and style</string>
+
+    <string name="section_money_value" translatable="false">money</string>
+    <string name="section_money_label">Money</string>
+
+    <string name="section_music_value" translatable="false">music</string>
+    <string name="section_music_label">Music</string>
+
+    <string name="section_news_value" translatable="false">news</string>
+    <string name="section_news_label">News</string>
+
+    <string name="section_science_value" translatable="false">science</string>
+    <string name="section_science_label">Science</string>
+
+    <string name="section_society_value" translatable="false">society</string>
+    <string name="section_society_label">Society</string>
+
+    <string name="section_sport_label">Sport</string>
+    <string name="section_sport_value" translatable="false">sport</string>
+
+    <string name="section_technology_value" translatable="false">technology</string>
+    <string name="section_technology_label">Technology</string>
+
+    <string name="section_travel_value" translatable="false">travel</string>
+    <string name="section_travel_label">Travel</string>
+
+    <string name="section_weather_value" translatable="false">weather</string>
+    <string name="section_weather_label">Weather</string>
+
+    <string name="section_world_value" translatable="false">world</string>
+    <string name="section_world_label">World news</string>
 </resources>

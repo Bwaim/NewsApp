@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2018 Fabien Boismoreau
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<resources>
+    <string-array name="settings_section_labels">
+        <item>@string/section_all_label</item>
+        <item>@string/section_animals_farmed_label</item>
+        <item>@string/section_artanddesign_label</item>
+        <item>@string/section_books_label</item>
+        <item>@string/section_business_label</item>
+        <item>@string/section_culture_label</item>
+        <item>@string/section_education_label</item>
+        <item>@string/section_environment_label</item>
+        <item>@string/section_fashion_label</item>
+        <item>@string/section_film_label</item>
+        <item>@string/section_games_label</item>
+        <item>@string/section_lifeandstyle_label</item>
+        <item>@string/section_money_label</item>
+        <item>@string/section_music_label</item>
+        <item>@string/section_news_label</item>
+        <item>@string/section_science_label</item>
+        <item>@string/section_society_label</item>
+        <item>@string/section_sport_label</item>
+        <item>@string/section_technology_label</item>
+        <item>@string/section_travel_label</item>
+        <item>@string/section_weather_label</item>
+        <item>@string/section_world_label</item>
+    </string-array>
+
+    <string-array name="settings_section_values">
+        <item>@string/section_all_value</item>
+        <item>@string/section_animals_farmed_value</item>
+        <item>@string/section_artanddesign_value</item>
+        <item>@string/section_books_value</item>
+        <item>@string/section_business_value</item>
+        <item>@string/section_culture_value</item>
+        <item>@string/section_education_value</item>
+        <item>@string/section_environment_value</item>
+        <item>@string/section_fashion_value</item>
+        <item>@string/section_film_value</item>
+        <item>@string/section_games_value</item>
+        <item>@string/section_lifeandstyle_value</item>
+        <item>@string/section_money_value</item>
+        <item>@string/section_music_value</item>
+        <item>@string/section_news_value</item>
+        <item>@string/section_science_value</item>
+        <item>@string/section_society_value</item>
+        <item>@string/section_sport_value</item>
+        <item>@string/section_technology_value</item>
+        <item>@string/section_travel_value</item>
+        <item>@string/section_weather_value</item>
+        <item>@string/section_world_value</item>
+    </string-array>
+</resources>

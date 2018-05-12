@@ -18,6 +18,7 @@ package com.bwaim.newsapp.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -25,6 +26,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bwaim.newsapp.R;
+
+import java.util.Set;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,6 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     public static class NewsPreferenceFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener {
+
+        private static final String OR_SEPARATOR = ", ";
+
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -43,6 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             Preference limit = findPreference(getString(R.string.settings_limit_key));
             bindPreferenceSummaryToValue(limit);
+
+            Preference section = findPreference(getString(R.string.settings_section_key));
+            bindPreferenceSummaryToValue(section);
         }
 
         private void bindPreferenceSummaryToValue(Preference preference) {
@@ -50,8 +59,15 @@ public class SettingsActivity extends AppCompatActivity {
 
             SharedPreferences preferences =
                     PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-            String preferenceString = preferences.getString(preference.getKey(), "");
-            onPreferenceChange(preference, preferenceString);
+
+            if (preference instanceof MultiSelectListPreference) {
+                Set<String> sectionsSet = preferences.getStringSet(preference.getKey()
+                        , null);
+                onPreferenceChange(preference, sectionsSet);
+            } else {
+                String preferenceString = preferences.getString(preference.getKey(), "");
+                onPreferenceChange(preference, preferenceString);
+            }
         }
 
         /**
@@ -65,11 +81,32 @@ public class SettingsActivity extends AppCompatActivity {
          */
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            String valueString = (String) newValue;
+            if (preference instanceof MultiSelectListPreference) {
+                @SuppressWarnings("unchecked")
+                Set<String> values = (Set<String>) newValue;
+                MultiSelectListPreference pref = (MultiSelectListPreference) preference;
+                CharSequence[] entries = pref.getEntries();
 
-            preference.setSummary(valueString);
+                StringBuilder stringValue = new StringBuilder();
+                boolean isFirst = true;
+                for (String section : values) {
+                    int index = pref.findIndexOfValue(section);
+                    if (index >= 0) {
+                        if (!isFirst) {
+                            stringValue.append(OR_SEPARATOR);
+                        } else {
+                            isFirst = false;
+                        }
+                        stringValue.append(entries[index]);
+                    }
+                }
+                preference.setSummary(stringValue.toString());
+            } else {
+                String valueString = (String) newValue;
+                preference.setSummary(valueString);
+            }
 
-            return false;
+            return true;
         }
     }
 }

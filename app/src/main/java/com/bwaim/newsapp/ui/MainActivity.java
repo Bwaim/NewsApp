@@ -21,10 +21,13 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +45,9 @@ import com.bwaim.newsapp.loaders.NewsLoader;
 import com.bwaim.newsapp.model.News;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
@@ -51,9 +56,9 @@ public class MainActivity extends AppCompatActivity
 
     private static final String QUERY = "QUERY";
 
-    private static final String DEFAULT_URL =
-            "http://content.guardianapis.com/search?q=sport&show-fields=trailText,thumbnail&show-tags=contributor&api-key="
-                    + BuildConfig.MY_GUARDIAN_API_KEY;
+    private static final String BASE_URL = "http://content.guardianapis.com/search";
+
+    private static final String OR_SEPARATOR = ",";
 
     /**
      * Views of the layout
@@ -79,8 +84,22 @@ public class MainActivity extends AppCompatActivity
 
         mNewsAdapter = new NewsAdapter(new ArrayList<News>());
         mRecyclerView.setAdapter(mNewsAdapter);
+    }
 
-        refreshNews(DEFAULT_URL);
+    /**
+     * Dispatch onResume() to fragments.  Note that for better inter-operation
+     * with older versions of the platform, at the point of this call the
+     * fragments attached to the activity are <em>not</em> resumed.  This means
+     * that in some cases the previous state may still be saved, not allowing
+     * fragment transactions that modify the state.  To correctly interact
+     * with fragments in their proper state, you should instead override
+     * {@link #onResumeFragments()}.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String query = buildQuery();
+        refreshNews(query);
     }
 
     /**
@@ -153,6 +172,46 @@ public class MainActivity extends AppCompatActivity
         mProgressBarPB.setVisibility(View.GONE);
         mEmptyListTV.setText(R.string.no_internet);
         mEmptyListTV.setVisibility(View.VISIBLE);
+    }
+
+    private String buildQuery() {
+//        "http://content.guardianapis.com/search?q=sport&show-fields=trailText,thumbnail&show-tags=contributor&api-key="
+//                + BuildConfig.MY_GUARDIAN_API_KEY;
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String limit = preferences.getString(getString(R.string.settings_limit_key)
+                , getString(R.string.settings_limit_default));
+
+        HashSet<String> defaultSection = new HashSet<>();
+        defaultSection.add(getString(R.string.settings_section_default));
+
+        Set<String> sectionsSet = preferences.getStringSet(getString(R.string.settings_section_key)
+                , defaultSection);
+        StringBuilder sections = new StringBuilder();
+        boolean first = true;
+        for (String section : sectionsSet) {
+            if (first) {
+                first = false;
+            } else {
+                sections.append(OR_SEPARATOR);
+            }
+            sections.append(section);
+        }
+
+        Uri baseUri = Uri.parse(BASE_URL);
+
+        Uri.Builder queryBuilder = baseUri.buildUpon();
+        if (!sections.toString().isEmpty()
+                && !sections.toString().contains(getString(R.string.settings_section_default))) {
+            queryBuilder.appendQueryParameter("q", sections.toString());
+        }
+        queryBuilder.appendQueryParameter("show-fields", "trailText,thumbnail");
+        queryBuilder.appendQueryParameter("show-tags", "contributor");
+        queryBuilder.appendQueryParameter("api-key", BuildConfig.MY_GUARDIAN_API_KEY);
+        queryBuilder.appendQueryParameter("page-size", limit);
+
+        return queryBuilder.toString();
     }
 
     private void refreshNews(String url) {
