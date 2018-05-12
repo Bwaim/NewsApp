@@ -38,7 +38,6 @@ import android.widget.CursorAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bwaim.newsapp.BuildConfig;
 import com.bwaim.newsapp.R;
 import com.bwaim.newsapp.adapters.NewsAdapter;
 import com.bwaim.newsapp.loaders.NewsLoader;
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         }
         queryBuilder.appendQueryParameter("show-fields", "trailText,thumbnail");
         queryBuilder.appendQueryParameter("show-tags", "contributor");
-        queryBuilder.appendQueryParameter("api-key", BuildConfig.MY_GUARDIAN_API_KEY);
+        queryBuilder.appendQueryParameter("api-key", "test"/*BuildConfig.MY_GUARDIAN_API_KEY*/);
         queryBuilder.appendQueryParameter("page-size", limit);
 
         return queryBuilder.toString();
